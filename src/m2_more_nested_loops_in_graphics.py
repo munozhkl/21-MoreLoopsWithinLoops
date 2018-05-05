@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Kathi Munoz.
+"""  # Done: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -49,9 +49,35 @@ def draw_upside_down_wall(rectangle, n, window):
     and n is nonnegative.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # done: 2. Implement and test this function.
     #     Some tests are already written for you (above).
     # ------------------------------------------------------------------
+    og_rect_ul = rectangle.get_upper_left_corner()
+    og_rect_lr = rectangle.get_lower_right_corner()
+    ul = rg.Point(og_rect_ul.x, og_rect_ul.y)
+    lr = rg.Point(og_rect_lr.x, og_rect_lr.y)
+    for k in range(n):
+        remember_ulx = ul.x
+        remember_lrx = lr.x
+        for l in range(k+1):
+            new_rect = rg.Rectangle(ul, lr)
+            new_rect.attach_to(window)
+            window.render(0.2)
+            ul.x = ul.x + rectangle.get_width()
+            lr.x = lr.x + rectangle.get_width()
+        ul.x = remember_ulx - 0.5*rectangle.get_width()
+        lr.x = remember_lrx - 0.5*rectangle.get_width()
+        ul.y = ul.y - rectangle.get_height()
+        lr.y = lr.y - rectangle.get_height()
+
+
+        # ul.x = ul.x - 0.5*rectangle.get_width()
+        # ul.y = ul.y - rectangle.get_height()
+        # lr.x = lr.x - 0.5*rectangle.get_width()
+        # lr.y = lr.y - rectangle.get_height()
+
+
+
 
 
 # ----------------------------------------------------------------------
